@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="false" id="twcClient" name="twcClient">
+    <meta content="jmxb。all rights reserved" name="copyright" />
+    <style type="text/css">
+        * {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-style: normal;
+        }
+        
+        .c_eb541c {
+            color: #eb541c;
+        }
+        
+        .p_l10 {
+            padding-left: 10px;
+        }
+        
+        .p_t10 {
+            padding-top: 10px;
+        }
+        
+        .m_t10 {
+            margin-top: 10px;
+        }
+        
+        .m_t20 {
+            margin-top: 20px;
+        }
+        
+        .questions {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <ul id="list">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+        </ul>
+    </section>
+    <script>
+        let li = document.getElementsByTagName('li');
+        for (let i = 0, len = li.length; i < len; i++) {
+            li[i].onclick = function() {
+                alert(i);
+            }
+        }
+    </script>
+    <p class="questions">判断一个单词是否是回文</p>
+    <script>
+        let str1 = 'woainixh';
+        let checkPalindrom = (str) => str = str.split('').reverse().join('');
+        console.log(checkPalindrom(str1));
+    </script>
+    <p class="questions">数组去重</p>
+    <script>
+        let arr1 = [1, 13, 24, 11, 11, 14, 1, 2];
+        let arr2 = [];
+        let same = false;
+        for (let i = 0, len = arr1.length; i < len; i++) {
+            for (let j = i + 1; j < len; j++) {
+                if (arr1[i] === arr1[j]) {
+                    same = true;
+                    break;
+                } else {
+                    same = false;
+                }
+            }
+            if (!same) {
+                arr2.push(arr1[i]);
+            }
+        }
+        console.log(arr2);
+    </script>
+    <p class="questions">统计一个字符串出现最多的字母</p>
+    <script>
+        let str2 = 'afjghdfraaaasdenas';
+        let findMaxDuplicateChar = (str) => {
+            let max;
+            let arr3 = str2.split('');
+            let obj1 = {};
+            let res = [];
+            let count, same2;
+            for (let i = 0, len = arr3.length; i < len; i++) {
+                count = 1;
+                same2 = false;
+                for (let j = i + 1; j < len; j++) {
+                    if (arr3[i] === arr3[j]) {
+                        count++
+                    }
+                }
+                for (let k = 0; k < i; k++) {
+                    if (arr3[i] === arr3[k]) {
+                        same2 = true;
+                    }
+                }
+                if (!same2) {
+                    obj1[arr3[i]] = count;
+                }
+            }
+            console.log(obj1)
+        }
+        findMaxDuplicateChar(str2)
+    </script>
+    <p class="questions">排序算法</p>
+    <script>
+        // 冒泡升序
+        let arr4 = [1, 2, 4, 5, 1, 7, 21, 10, 32, 27];
+        let bubbleSort = (arr) => {
+            for (let i = 0, len = arr4.length; i < len; i++) {
+                for (let j = i + 1; j < len; j++) {
+                    if (arr4[i] < arr4[j]) {
+                        [arr4[i], arr4[j]] = [arr4[j], arr4[i]];
+                    }
+                }
+            }
+        }
+        bubbleSort(arr4)
+        console.log(arr4);
+        let arr5 = [1, 2, 4, 5, 1, 7, 21, 10, 32, 27];
+
+        // JS实现快速排序(从小到大排列)
+        if (typeof Array.prototype.quickSort !== 'function') {
+            Array.prototype.quickSort = function() {
+                quickSortHelper(this, 0, this.length - 1);
+                // 确定哨兵, 递归分离
+                function quickSortHelper(arr, start, end) {
+                    if (start < end) { //快排结束条件start>=end
+                        // 获取哨兵的位置
+                        var part = partation(arr, start, end);
+
+                        // 根据递归实现排序
+                        // 调用自身
+                        arguments.callee(arr, start, part - 1);
+                        arguments.callee(arr, part + 1, end);
+                    }
+                }
+
+                function partation(arr, start, end) {
+                    let pivot = arr[end]; // 设置哨兵
+                    let i = start; // 交换的次数+1 哨兵要在数组插入的位置
+                    for (let j = start; j < end; j++) {
+                        if (arr[j] > pivot) {
+                            // swap(arr, i, j);
+                            [arr[i], arr[j]] = [arr[j], arr[i]];
+                            i++;
+                        }
+                    }
+                    // swap(arr, i, end);
+                    [arr[i], arr[end]] = [arr[end], arr[i]];
+                    return i;
+                }
+            }
+        }
+
+        //------------------- test ------      
+        arr5.quickSort();
+        console.log(arr5);
+    </script>
+    <p class="questions">排序算法</p>
+    <script>
+        let arr6 = [1, 2, 4, 5, 1, 7, 8, 21, 10, 32, 27];
+
+        var quickSort5 = function(arr) {　　
+            if (arr.length <= 1) {
+                return arr;
+            }
+            var pivotIndex = Math.floor(arr.length / 2);　　
+            var pivot = arr.splice(pivotIndex, 1)[0];
+            var left = [];　　
+            var right = [];　　
+            for (var i = 0; i < arr.length; i++) {　　　　
+                if (arr[i] <= pivot) {　　　　　　
+                    left.push(arr[i]);　　　　
+                } else {　　　　　　
+                    right.push(arr[i]);　　　　
+                }　　
+            }
+            return quickSort5(left).concat([pivot], quickSort5(right));
+        };
+        let arr7 = quickSort5(arr6)
+        console.log(arr7)
+    </script>
+    <p class="questions">快排</p>
+    <script>
+        let arr8 = [1, 2, 4, 5, 1, 7, 8, 21, 10, 32, 27];
+        let quickSort6 = (arr) => {
+            if (arr.length <= 1) {
+                return arr;
+            }
+            let pivotIndex = Math.floor(arr.length / 2);
+            let pivot = arr.splice(pivotIndex, 1)[0];
+            let right = [];
+            let left = [];
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i] > pivot) {
+                    left.push(arr[i]);
+                } else {
+                    right.push(arr[i])
+                }
+            }
+            return quickSort6(left).concat([pivot], quickSort6(right));
+        }
+        let arr9 = quickSort6(arr8);
+        console.log(arr9);
+    </script>
+    <p class="questions">偶串</p>
+    <script>
+        let ouChuan = (s) => {
+            if (s.length % 2 != 0) {
+                return '不是偶串';
+            } else {
+                let half = s.length / 2;
+                console.log(s.slice(0, half));
+                console.log(s.slice(half));
+                if (s.slice(0, half) == s.slice(half)) {
+                    return '偶串';
+                } else {
+                    return '不是偶串';
+                }
+            }
+        }
+        let result = ouChuan('123321');
+        console.log(result);
+    </script>
+</body>
+
+</html>
